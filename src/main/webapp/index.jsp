@@ -12,71 +12,54 @@
 <body>
 <h1>Tic-Tac-Toe</h1>
 
-<div>
-    <table>
-        <tr>
-            <td onclick="window.location='/logic?click=0'">${data.get(0).getSign()}</td>
-            <td onclick="window.location='/logic?click=1'">${data.get(1).getSign()}</td>
-            <td onclick="window.location='/logic?click=2'">${data.get(2).getSign()}</td>
-        </tr>
-        <tr>
-            <td onclick="window.location='/logic?click=3'">${data.get(3).getSign()}</td>
-            <td onclick="window.location='/logic?click=4'">${data.get(4).getSign()}</td>
-            <td onclick="window.location='/logic?click=5'">${data.get(5).getSign()}</td>
-        </tr>
-        <tr>
-            <td onclick="window.location='/logic?click=6'">${data.get(6).getSign()}</td>
-            <td onclick="window.location='/logic?click=7'">${data.get(7).getSign()}</td>
-            <td onclick="window.location='/logic?click=8'">${data.get(8).getSign()}</td>
-        </tr>
-    </table>
-</div>
+<table>
+    <tr>
+        <td onclick="window.location='/logic?click=0'">${data.get(0).getSign()}</td>
+        <td onclick="window.location='/logic?click=1'">${data.get(1).getSign()}</td>
+        <td onclick="window.location='/logic?click=2'">${data.get(2).getSign()}</td>
+    </tr>
+    <tr>
+        <td onclick="window.location='/logic?click=3'">${data.get(3).getSign()}</td>
+        <td onclick="window.location='/logic?click=4'">${data.get(4).getSign()}</td>
+        <td onclick="window.location='/logic?click=5'">${data.get(5).getSign()}</td>
+    </tr>
+    <tr>
+        <td onclick="window.location='/logic?click=6'">${data.get(6).getSign()}</td>
+        <td onclick="window.location='/logic?click=7'">${data.get(7).getSign()}</td>
+        <td onclick="window.location='/logic?click=8'">${data.get(8).getSign()}</td>
+    </tr>
+</table>
 
-<div>
-    <hr>
-    <c:set var="CROSSES" value="<%=Sign.CROSS%>"/>
-    <c:set var="NOUGHTS" value="<%=Sign.NOUGHT%>"/>
-    <c:choose>
-        <c:when test="${winner == null}">
-            <h1>Play in progress...</h1>
-            <br>
-            <button onclick="restart()">Start again</button>
-        </c:when>
-        <c:when test="${winner == CROSSES}">
-            <h1>CROSSES WIN!</h1>
-            <br>
-            <button onclick="restart()">Start again</button>
-        </c:when>
-        <c:when test="${winner == NOUGHTS}">
-            <h1>NOUGHTS WIN!</h1>
-            <br>
-            <button onclick="restart()">Start again</button>
-        </c:when>
-    </c:choose>
+<hr>
+<c:set var="CROSSES" value="<%=Sign.CROSS%>"/>
+<c:set var="NOUGHTS" value="<%=Sign.NOUGHT%>"/>
 
-    <c:if test="${draw}">
-        <h1>IT'S A DRAW</h1>
-        <br>
-        <button onclick="restart()">Start again</button>
-    </c:if>
-</div>
+<c:if test="${winner == CROSSES}">
+    <h1>CROSSES WIN!</h1>
+    <button onclick="restart()">Start again</button>
+</c:if>
+<c:if test="${winner == NOUGHTS}">
+    <h1>NOUGHTS WIN!</h1>
+    <button onclick="restart()">Start again</button>
+</c:if>
+<c:if test="${draw}">
+    <h1>IT'S A DRAW</h1>
+    <button onclick="restart()">Start again</button>
+</c:if>
 
-<div>
-    <script>
-        function restart() {
-            $.ajax({
-                url: '/restart',
-                type: 'POST',
-                contentType: 'application/json;charset=UTF-8',
-                async: false,
-                success: function () {
-                    location.reload();
-                }
-            });
-        }
-    </script>
-</div>
-
+<script>
+    function restart() {
+        $.ajax({
+            url: '/restart',
+            type: 'POST',
+            contentType: 'application/json;charset=UTF-8',
+            async: false,
+            success: function () {
+                location.reload();
+            }
+        });
+    }
+</script>
 
 </body>
 </html>
